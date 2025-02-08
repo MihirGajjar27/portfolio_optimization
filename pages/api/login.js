@@ -41,15 +41,17 @@ export default async function handler(req, res) {
     // Set the session and userEmail cookies
     res.setHeader("Set-Cookie", [
       serialize("session", sessionToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        httpOnly: false,
+        secure: false,
+        domain: "risk-profiling.vercel.app",
         sameSite: "strict",
         path: "/",
         maxAge: 60 * 60 * 24 * 7, // 1 week in seconds
       }),
       serialize("userEmail", email, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        httpOnly: false,
+        secure: false,
+        domain: "risk-profiling.vercel.app",
         sameSite: "strict",
         path: "/",
         maxAge: 60 * 60 * 24 * 7,

@@ -78,6 +78,12 @@ export default function RiskProfileQuiz({ loggedIn }) {
       answerChoices: { option1: "No Income", option2: "Pension, Retirement, or Welfare", option3: "Salary", option4: "Business Income", option5: "Passive Investments" },
       weights: { "No Income": 0, "Pension, Retirement, or Welfare": 0.25, "Salary": 0.5, "Business Income": 0.75, "Passive Investments": 1 },
     },
+    {
+      id: "q6",
+      question: "How much of the past five years have you spent unemployed?",
+      answerChoices: { option1: "Less than 3 months", option2: "Less than 6 months", option3: "Less than 1 year", option4: "Fully employed during the past five years/retired/taking a break from work\""},
+      weights: {"Less than 3 months": 0, "Less than 6 months": 1/3, "Less than 1 year": 2/3, "Fully employed during the past five years/retired/taking a break from work": 1 },
+    },
   ];
 
   const step2Questions = [
@@ -95,19 +101,19 @@ export default function RiskProfileQuiz({ loggedIn }) {
     },
     {
       id: "q3",
-      question: "How would you feel about making a high-risk investment with a 50% chance of doubling your money but a 50% chance of losing it?",
+      question: "How likely are you to undertake an investment opportunity with a 50% chance of doubling your money but a 50% chance of losing it?",
       answerChoices: { option1: "Never", option2: "Unlikely", option3: "Possibly", option4: "Definitely" },
       weights: { "Never": 0, "Unlikely": 1/3, "Possibly": 2/3, "Definitely": 1 },
     },
     {
       id: "q4",
-      question: "If given a choice between a guaranteed 4% return and a chance at 10% with some risk, which would you choose?",
-      answerChoices: { option1: "4% guaranteed", option2: "6% if risk is low", option3: "8% with moderate risk", option4: "10% regardless of risk" },
-      weights: { "4% guaranteed": 0, "6% if risk is low": 1/3, "8% with moderate risk": 2/3, "10% regardless of risk": 1 },
+      question: "Which investment opportunity is most attractive to you?",
+      answerChoices: { option1: "4% return, no risk", option2: "6% return, low loss potential", option3: "10% return, moderate loss potential", option4: "15% return, unknown loss potential" },
+      weights: { "4% return, no risk": 0, "6% return, low loss potential": 1/3, "10% return, moderate loss potential": 2/3, "15% return, unknown loss potential": 1 },
     },
     {
       id: "q5",
-      question: "Over the last 5 years, how have you typically allocated new investments?",
+      question: "Over the last five years, how have you typically allocated new investments?",
       answerChoices: { option1: "Mostly cash & bonds", option2: "Balanced mix", option3: "Mostly Stocks", option4: "High-risk assets" },
       weights: { "Mostly cash & bonds": 0, "Balanced mix": 1/3, "Mostly Stocks": 2/3, "High-risk assets": 1 },
     },
