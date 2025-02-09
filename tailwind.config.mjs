@@ -7,6 +7,13 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: [
+    'border-1',
+    'border-2',
+    '7xl',
+    'primary',
+    'secondary'
+  ],
   theme: {
     extend: {
       maxWidth: {
@@ -14,7 +21,8 @@ module.exports = {
       },
       borderWidth: {
         '1': '1px',
-        '2': '2px'
+        '2': '2px',
+
       },
       borderColor: {
         'primary': '#1B1B1B',
