@@ -13,7 +13,7 @@ export default function Header() {
 					<Navbar current_page={"home"}/>
 				</div>
 			</div>
-			<ProgressBar/>
+			{/*<ProgressBar/>*/}
 		</>
 	)
 }
