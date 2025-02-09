@@ -1,4 +1,3 @@
-// pages/api/quiz.js
 import clientPromise from "@/lib/db";
 
 export default async function handler(req, res) {
@@ -8,7 +7,7 @@ export default async function handler(req, res) {
   }
 
   const { quizResults } = req.body;
-  // We assume that during login the cookie "userEmail" is set
+  // Read the "userEmail" cookie (set to httpOnly: false, so it’s available to the client too—but server-side reading works regardless).
   const userEmail = req.cookies.userEmail;
 
   if (!userEmail) {
@@ -17,7 +16,8 @@ export default async function handler(req, res) {
 
   try {
     const client = await clientPromise;
-    const db = client.db('portfolio_management');
+    const db = client.db("portfolio_management");
+
     // Update the user's document by setting the quiz_results key.
     await db.collection("users").updateOne(
       { email: userEmail },

@@ -1,4 +1,3 @@
-// pages/api/signup.js
 import clientPromise from "/lib/db";
 import bcrypt from "bcryptjs";
 import { serialize } from "cookie";
@@ -27,7 +26,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // Hash the password before storing (using 10 rounds of salt)
+    // Hash the password before storing it (using 10 rounds of salt)
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create the new user document
@@ -55,18 +54,21 @@ export default async function handler(req, res) {
       expires: oneWeekFromNow,
     });
 
-    // Set the session and userEmail cookies
+    const isProduction = process.env.NODE_ENV === "production";
+
+    // Set the cookies:
+    // "session" is kept httpOnly, and "userEmail" is set to httpOnly: false.
     res.setHeader("Set-Cookie", [
       serialize("session", sessionToken, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: isProduction,
         sameSite: "strict",
         path: "/",
-        maxAge: 60 * 60 * 24 * 7, // 1 week
+        maxAge: 60 * 60 * 24 * 7, // 1 week in seconds
       }),
       serialize("userEmail", email, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        httpOnly: false,
+        secure: isProduction,
         sameSite: "strict",
         path: "/",
         maxAge: 60 * 60 * 24 * 7,

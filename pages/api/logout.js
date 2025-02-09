@@ -1,4 +1,3 @@
-// pages/api/logout.js
 import { serialize } from "cookie";
 
 export default async function handler(req, res) {
@@ -7,18 +6,21 @@ export default async function handler(req, res) {
     return;
   }
 
-  // Clear both the session and userEmail cookies by setting an expired date
+  const isProduction = process.env.NODE_ENV === "production";
+
+  // Clear the cookies by setting them with an expired date.
+  // Note: "userEmail" is cleared with httpOnly: false to match login.
   res.setHeader("Set-Cookie", [
     serialize("session", "", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      secure: isProduction,
       sameSite: "strict",
       path: "/",
       expires: new Date(0),
     }),
     serialize("userEmail", "", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      httpOnly: false,
+      secure: isProduction,
       sameSite: "strict",
       path: "/",
       expires: new Date(0),

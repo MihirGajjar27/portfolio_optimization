@@ -1,4 +1,3 @@
-// pages/api/login.js
 import clientPromise from "@/lib/db";
 import bcrypt from "bcryptjs";
 import { serialize } from "cookie";
@@ -41,10 +40,12 @@ export default async function handler(req, res) {
     // Determine if we are in production.
     const isProduction = process.env.NODE_ENV === "production";
 
-    // Set the session and userEmail cookies without a hardcoded domain.
+    // Set the cookies:
+    // - "session" is httpOnly for security
+    // - "userEmail" is NOT httpOnly so that client‐side code can access it if needed.
     res.setHeader("Set-Cookie", [
       serialize("session", sessionToken, {
-        httpOnly: true, // Better security practice: prevent client-side access.
+        httpOnly: true,
         secure: isProduction,
         sameSite: "strict",
         path: "/",
