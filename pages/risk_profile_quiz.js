@@ -496,7 +496,7 @@ export default function RiskProfileQuiz({ loggedIn }) {
       <Header />
 
       {/* Progress Bar with Circular Steps */}
-      <div className="sticky top-0 z-50 relative bg-gray-100 border-t border-b border-gray-800 py-2 overflow-hidden">
+      <div className="sticky top-0 z-50 bg-gray-100 border-t border-b border-gray-800 py-2 overflow-hidden">
         <div
           ref={progressContainerRef}
           className="w-full max-w-xl mx-auto px-4 relative"
@@ -530,7 +530,7 @@ export default function RiskProfileQuiz({ loggedIn }) {
         <div className="w-full py-10 flex justify-center">
           <div className="flex flex-col w-full p-10 bg-gray-100 backdrop-blur-2xl rounded-lg drop-shadow-lg max-w-3xl">
             {/* Quiz Questions */}
-            <h2 className="text-3xl font-bold mb-6">{sectionTitle}</h2>
+            <h2 className="text-3xl font-medium mb-6">{sectionTitle}</h2>
             {questions.map((q) => (
               <MultipleChoiceQuestion
                 key={q.id}
@@ -559,27 +559,33 @@ export default function RiskProfileQuiz({ loggedIn }) {
                 {message}
               </p>
             )}
-            <div className="flex justify-between mt-8 items-center">
+            <div className="flex justify-center mt-8 items-center space-x-2">
               {currentStep > 1 ? (
                 <button
-                  className="text-2xl"
+                  className="text-2xl px-4 py-1 bg-gray-200 rounded-lg transition-colors duration-300 border-1 border-gray-400 hover:border-blue-500"
                   onClick={() => {
                     setMessage("");
                     setCurrentStep(currentStep - 1);
                   }}
                 >
-                  ←
+                  <div className={"flex flex-nowrap flex-row text-base space-x-2"}>
+                    <p>←</p>
+                    {/*<p>Prev</p>*/}
+                  </div>
                 </button>
               ) : (
                 <div></div>
               )}
               {currentStep < 3 ? (
-                <button className="text-2xl" onClick={handleNext}>
-                  →
+                <button className="text-2xl px-4 py-1 bg-gray-200 rounded-lg transition-colors duration-300 border-1 border-gray-400 hover:border-blue-500" onClick={handleNext}>
+                  <div className={"flex flex-nowrap flex-row text-base space-x-2"}>
+                    {/*<p>Next</p>*/}
+                    <p>→</p>
+                  </div>
                 </button>
               ) : (
                 <button
-                  className="bg-blue-600 text-white py-2 px-4 rounded mx-auto"
+                  className="bg-blue-600 text-white py-1 px-2 rounded mx-auto"
                   onClick={handleSubmit}
                 >
                   Submit

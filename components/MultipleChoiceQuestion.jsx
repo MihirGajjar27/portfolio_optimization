@@ -25,7 +25,7 @@ export default function MultipleChoiceQuestion({
 
   return (
     <div className="mb-4">
-      <p className="mb-2 font-semibold">{question}</p>
+      <p className="mb-2 font-medium">{question}</p>
       {Object.entries(answerChoices).map(([key, value]) => (
         <div key={key} className="mb-1">
           <label className="inline-flex items-center">
