@@ -38,20 +38,21 @@ export default async function handler(req, res) {
       expires: oneWeekFromNow,
     });
 
-    // Set the session and userEmail cookies
+    // Determine if we are in production.
+    const isProduction = process.env.NODE_ENV === "production";
+
+    // Set the session and userEmail cookies without a hardcoded domain.
     res.setHeader("Set-Cookie", [
       serialize("session", sessionToken, {
-        httpOnly: false,
-        secure: false,
-        domain: "risk-profiling.vercel.app",
+        httpOnly: true, // Better security practice: prevent client-side access.
+        secure: isProduction,
         sameSite: "strict",
         path: "/",
         maxAge: 60 * 60 * 24 * 7, // 1 week in seconds
       }),
       serialize("userEmail", email, {
         httpOnly: false,
-        secure: false,
-        domain: "risk-profiling.vercel.app",
+        secure: isProduction,
         sameSite: "strict",
         path: "/",
         maxAge: 60 * 60 * 24 * 7,
