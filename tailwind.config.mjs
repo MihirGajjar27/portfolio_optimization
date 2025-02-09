@@ -8,11 +8,9 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   safelist: [
-    'border-1',
-    'border-2',
-    '7xl',
-    'primary',
-    'secondary'
+    {
+      pattern: /./, // the "." means "everything"
+    },
   ],
   theme: {
     extend: {
